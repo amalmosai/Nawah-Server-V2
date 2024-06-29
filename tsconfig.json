@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "es2022",                                 
+        "moduleResolution": "NodeNext",
+        "module": "NodeNext", 
+        "sourceMap": true, 
+        "outDir": "dist", 
+        "esModuleInterop": true, 
+        "resolveJsonModule": true,                             
+        "strict": true,                                      
+        "skipLibCheck": true ,
+        "typeRoots": ["./node_modules/@types", "src/interfaces"]                                 
+    },
+    "include": ["src/**/*" , "src/*.d.ts"],
+}
