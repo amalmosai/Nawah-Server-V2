@@ -31,12 +31,22 @@ const swaggerUiOptions = {
     swaggerOptions: {
         url: '/api-docs/swagger.json',
     },
-    cssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css',
+    customSiteTitle:"Nawah Api",
+    customCssUrl: [
+        "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.min.css",
+        "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-standalone-preset.min.css",
+        "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.css",
+    ].join(", "),
+    customJs: [
+        "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-bundle.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-standalone-preset.min.js",
+    ].join(", "),
 };
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(
     swaggerDocument,
     swaggerUiOptions
 ));
+
 
 app.use('/api/v2/auth',authRoute);
 app.use('/api/v2/user',userRoute);
