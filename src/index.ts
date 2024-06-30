@@ -44,6 +44,6 @@ app.use(errorhandler);
 
 // SETUP CONNECTION
 config.connect();
-server.listen(config.port, () => {
+app.listen(config.port, () => {
     console.log(`Nawah app listening on port ${config.port}!`);
 });
