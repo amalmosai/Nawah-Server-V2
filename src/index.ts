@@ -32,7 +32,11 @@ const swaggerUiOptions = {
         url: './utils/swagger.ts',
     },
     customSiteTitle:"Nawah Api",
-    customCssUrl: 'https://cdn.jsdelivr.net/npm/swagger-ui-dist@4.1.0/swagger-ui.css',
+    customCssUrl: 'https://cdn.jsdelivr.net/npm/swagger-ui-dist@4.6.1/swagger-ui.css',
+    customJs: [
+        "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.6.1/swagger-ui-bundle.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.6.1/swagger-ui-standalone-preset.min.js",
+    ].join(", "),
 };
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(
     swaggerDocument,
