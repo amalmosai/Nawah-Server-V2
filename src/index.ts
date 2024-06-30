@@ -27,7 +27,16 @@ app.use((express.json({ limit: "30mb"})));
 app.use((express.urlencoded({ limit: "30mb", extended: true})));
 app.use("/uploads",express.static(path.join(__dirname,'../public/uploads')));
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+const swaggerUiOptions = {
+    swaggerOptions: {
+        url: '/api-docs/swagger.json',
+    },
+    cssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css',
+};
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(
+    swaggerDocument,
+    swaggerUiOptions
+));
 
 app.use('/api/v2/auth',authRoute);
 app.use('/api/v2/user',userRoute);
@@ -44,6 +53,7 @@ app.use(errorhandler);
 
 // SETUP CONNECTION
 config.connect();
+
 app.listen(config.port, () => {
     console.log(`Nawah app listening on port ${config.port}!`);
 });
