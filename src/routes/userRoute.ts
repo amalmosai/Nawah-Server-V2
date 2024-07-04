@@ -1,6 +1,6 @@
 import express from 'express';
 import * as userController from '../controller/userController';
-import upload from '../middlewares/uploadImage';
+import {upload} from '../middlewares/uploadImage';
 import { authenticateUser,authorizeRoles } from '../middlewares/auth';
 const router = express.Router();
 

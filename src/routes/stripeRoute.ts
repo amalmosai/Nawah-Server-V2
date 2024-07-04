@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.route('/')
             .post(
-                    // authenticateUser,
+                    authenticateUser,
                     stripeController.createPaymentIntent
                 );               
 

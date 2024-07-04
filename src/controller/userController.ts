@@ -117,7 +117,7 @@ export const updateUser = asyncWrapper(async(req:Request , res:Response ,next:Ne
         address,
         img,
         role
-    } = req.body as IUser;
+    } = req.body;
 
     let avatar;
     if(req.file?.filename){
@@ -126,15 +126,18 @@ export const updateUser = asyncWrapper(async(req:Request , res:Response ,next:Ne
         avatar=img;
     };
 
-    const hashPassword= await bcrypt.hash(password,10);
+    let hashPassword;
+    if(password){
+        hashPassword= await bcrypt.hash(password,10);
+    }
 
     let updateUser = await User.findByIdAndUpdate(
         userId,
         {
-            fname,
-            lname,
-            email,
-            password:hashPassword,
+            fname:fname?fname:(user.fname),
+            lname:lname?lname:(user.lname),
+            email:email?email:(user.email),
+            password:password?hashPassword:(user.password),
             phone,
             address,
             img:avatar,

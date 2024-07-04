@@ -29,6 +29,7 @@ export const authorizeRoles = (...roles:string[]) => {
     return (req:Request, res:Response, next:NextFunction) => {
         if (!roles.includes(req.body.authUser.role)) {
             console.log(req.body.authUser.role)
+            console.log(roles)
             return next(createCustomError(`Unauthorized to access this route`,HttpCode.UNAUTHORIZED));
         }
         next();

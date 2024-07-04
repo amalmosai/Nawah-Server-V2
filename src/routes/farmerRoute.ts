@@ -1,6 +1,6 @@
 import express from 'express';
 import * as farmerController from '../controller/farmerController';
-import upload from '../middlewares/uploadImage';
+import {upload} from '../middlewares/uploadImage';
 import { authenticateUser,authorizeRoles } from '../middlewares/auth';
 const router = express.Router();
 
@@ -19,6 +19,13 @@ router.route('/')
 router.route('/:id')
             .get(farmerController.getFarmer);
 
+router.route('/addNote')
+            .put(
+                    authenticateUser,
+                    authorizeRoles('engineer'),
+                    farmerController.addNoteByEng
+                );
+
 router.route('/:id')
             .put(
                     authenticateUser,
@@ -26,13 +33,7 @@ router.route('/:id')
                     upload.single('img'),
                     farmerController.updateFarmer
                 ); 
-
-router.route('/addNote')
-            .put(
-                    authenticateUser,
-                    authorizeRoles('engineer'),
-                    farmerController.addNoteByEng
-                ); 
+ 
 
 router.route('/:id')
             .delete(

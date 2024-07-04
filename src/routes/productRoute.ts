@@ -1,6 +1,6 @@
 import express from 'express';
 import * as prdController from '../controller/productController';
-import upload from '../middlewares/uploadImage';
+import { upload } from '../middlewares/uploadImage';
 import { authenticateUser,authorizeRoles } from '../middlewares/auth';
 const router = express.Router();
 
@@ -8,8 +8,8 @@ router.route('/')
                 .post(
                         authenticateUser,
                         authorizeRoles('admin','farmer'),
-                        upload.single('imageUrl'), 
-                        prdController.addPrd
+                        upload.single('imageUrl'),
+                        prdController.addPrd,
                 );
 
 router.route('/')

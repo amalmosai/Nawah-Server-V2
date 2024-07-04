@@ -111,7 +111,7 @@ export const getFarmer = asyncWrapper(async(req:Request , res:Response ,next:Nex
 export const updateFarmer = asyncWrapper(async(req:Request , res:Response ,next:NextFunction)=>{
     const farmerId = req.params.id;
     const farmer:IFarmer | null = await Farmer.findById(farmerId);
-    
+    console.log(farmerId)
     if(!farmer){
         return next(createCustomError(`No farmer with id : ${farmerId}`,HttpCode.NOT_FOUND));
     };

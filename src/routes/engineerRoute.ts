@@ -1,6 +1,6 @@
 import express from 'express';
 import * as engineerController from '../controller/engineerController';
-import upload from '../middlewares/uploadImage';
+import {upload} from '../middlewares/uploadImage';
 import { authenticateUser,authorizeRoles } from '../middlewares/auth';
 const router = express.Router();
 

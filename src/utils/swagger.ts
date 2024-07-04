@@ -2362,6 +2362,15 @@ const options: swaggerJsdoc.Options = {
                                         tax: {
                                             type: "number",
                                             description: "The tax"
+                                        },
+                                        paymentIntentId: {
+                                            type: "string",
+                                        },
+                                        clientSecret: {
+                                            type: "string",
+                                        },
+                                        status:{
+                                            type:"string"
                                         }
                                     },
                                     required: ["items", "shippingFee", "tax"]
@@ -2780,6 +2789,97 @@ const options: swaggerJsdoc.Options = {
                                 }
                             }
                         }
+                    }
+                },
+            },
+
+            
+            /********************************************************/
+            /**======================stripe docs=============== */
+            "/stripe/":{
+                post: {
+                    summary: "Create a PaymentIntent.",
+                    tags: ["Stripe"],
+                    description: "Create a  PaymentIntent with the given paymentMethodId, total amount of order",
+                    security:[
+                    {
+                        bearerAuth:[],
+                    }
+                    ],
+                    requestBody: {
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+                                    properties: {
+                                        total: {
+                                            type: "number",
+                                            description: "The total amount of order"
+                                        },
+                                        paymentMethod: {
+                                            type: "object",
+                                        },
+                                    },
+                                    required: ["total", "paymentMethod"]
+                                }
+                            }
+                        }
+                    },
+                    responses: {
+                    "201": {
+                        description: "payment created successfully",
+                        content: {
+                        "application/json": {
+                            schema: {
+                            type: "object",
+                            properties: {
+                                success: {
+                                    type: "boolean"
+                                },
+                                requires_action:{
+                                    type: "boolean"
+                                },
+                                payment_intent_client_secret: {
+                                    type: "string"
+                                },
+                                paymentIntent_id:{
+                                    type: "string"
+                                },
+                                message: {
+                                    type: "string"
+                                }
+                            }
+                            }
+                        }
+                        }
+                    },
+                    "400": {
+                        description: "Bad Request",
+                        content: {
+                        "application/json": {
+                            schema: {
+                            type: "object",
+                            properties: {
+                                success: {
+                                type: "boolean",
+                                default: false
+                                },
+                                data: {
+                                type: "object",
+                                default: null
+                                },
+                                message: {
+                                type: "string"
+                                },
+                                statusCode: {
+                                type: "number",
+                                default: 400
+                                }
+                            }
+                            }
+                        }
+                        }
+                    }
                     }
                 },
             }

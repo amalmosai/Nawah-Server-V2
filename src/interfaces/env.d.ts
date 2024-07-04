@@ -10,6 +10,10 @@ export declare global {
             NODE_ENV : string;
             STRIPE_SECRET_KEY: string;
             LOG_FILE_PATH:string;
+            CLOUDINARY_CLOUD_NAME:string;
+            CLOUDINARY_API_KEY:string;
+            CLOUDINARY_API_SECRET:string;
+            CLOUDINARY_URL:string;
         }
     }
 }

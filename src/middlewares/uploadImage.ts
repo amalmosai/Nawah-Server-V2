@@ -1,6 +1,8 @@
 import multer,{FileFilterCallback} from 'multer';
-import express,{Request} from 'express';
+import express,{NextFunction, Request} from 'express';
 import path from 'path';
+import cloudinary from '../utils/cloudinary';
+import { HttpCode, createCustomError } from '../errors/customError';
 const route = express.Router();
 route.use(express.static('public/uploads'));
 
@@ -20,6 +22,7 @@ let filestorage = multer.diskStorage({
     }
 })
 
+
 const multerFilter = function (req:Request, file:Express.Multer.File, cb:FileFilterCallback) {
     const acceptedMimetypes = ['image/jpeg', 'image/png', 'image/gif'];
     if (acceptedMimetypes.includes(file.mimetype)) {
@@ -30,10 +33,31 @@ const multerFilter = function (req:Request, file:Express.Multer.File, cb:FileFil
     }
 };
 
-let upload = multer({
+export const upload = multer({
     storage:filestorage ,   
     fileFilter:multerFilter,
     
-})
+});
 
-export default upload;
+
+// interface CloudinaryFile extends Express.Multer.File{
+//     buffer: Buffer;
+//     cloudinaryUrl: string;
+// };
+
+
+// export const uploadToCloudinary = async (req:any, next:any) => {
+//     try {
+//         const file = req.file as CloudinaryFile;
+//         const result = await cloudinary.uploader.upload(file.buffer, {
+//             folder: 'nawah/images',
+//             public_id: file.originalname,
+//         });
+//         file.cloudinaryUrl = result.secure_url;
+//         next();
+//     } catch (error) {
+//         console.error(error);
+//         return next(createCustomError('Error uploading file to Cloudinary',HttpCode.INTERNAL_SERVER_ERROR));
+//     }
+// };
+

@@ -1,11 +1,12 @@
 import express from 'express';
 const router = express.Router();
 import * as orderController from '../controller/orderController';
-import { authenticateUser } from '../middlewares/auth';
+import { authenticateUser, authorizeRoles } from '../middlewares/auth';
 
 router.route('/')
             .post(
                     authenticateUser,
+                    authorizeRoles('user','farmer'),
                     orderController.createOrder
                 );
 
